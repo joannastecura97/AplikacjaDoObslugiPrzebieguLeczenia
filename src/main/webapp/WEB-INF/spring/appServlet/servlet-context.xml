@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3306/hospital?zeroDateTimeBehavior=convertToNull" />
+		<beans:property name="username" value="adminHospital" />
+		<beans:property name="password" value="hospitaladmin" />
+	</beans:bean>
+
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<beans:bean id="hibernate4AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				
+                                <beans:value>com.hospital.spring.model.OsobaUpowazniona</beans:value>
+                                <beans:value>com.hospital.spring.model.Pacjent</beans:value>
+                                <beans:value>com.hospital.spring.model.Pracownik</beans:value>
+                                <beans:value>com.hospital.spring.model.HistoriaChoroby</beans:value>
+                                <beans:value>com.hospital.spring.model.WpisDoSzpitala</beans:value>
+                                <beans:value>com.hospital.spring.model.WypisZeSzpitala</beans:value>
+                                <beans:value>com.hospital.spring.model.KsiegaPrzyjecWypisow</beans:value>
+                                <beans:value>com.hospital.spring.model.KsiegaChorychOddzialu</beans:value>
+                                <beans:value>com.hospital.spring.model.SzpitalJednOrg</beans:value>
+                                <beans:value>com.hospital.spring.model.SzpitalKomOrg</beans:value>
+                                <beans:value>com.hospital.spring.model.SzpitalPodmiot</beans:value>
+                                <beans:value>com.hospital.spring.model.PrzebiegHospitalizacji</beans:value>
+                                <beans:value>com.hospital.spring.model.KsiegaRaportowPielegniarskich</beans:value>
+                                <beans:value>com.hospital.spring.model.RaportPielegniarski</beans:value>
+                                <beans:value>com.hospital.spring.model.KartaInformacyjna</beans:value>
+                                <beans:value>com.hospital.spring.model.KsiegaRaportowLekarskich</beans:value>
+                                <beans:value>com.hospital.spring.model.KsiegaZabiegow</beans:value>
+                                <beans:value>com.hospital.spring.model.WywiadPielegniarski</beans:value>
+                                <beans:value>com.hospital.spring.model.Dzialanie</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="osobaUpowaznionaDAO" class="com.hospital.spring.dao.OsobaUpowaznionaDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="osobaUpowaznionaService" class="com.hospital.spring.service.OsobaUpowaznionaServiceImpl">
+		<beans:property name="osobaUpowaznionaDAO" ref="osobaUpowaznionaDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="pacjentDAO" class="com.hospital.spring.dao.PacjentDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="pacjentService" class="com.hospital.spring.service.PacjentServiceImpl">
+		<beans:property name="pacjentDAO" ref="pacjentDAO"></beans:property>
+	</beans:bean>
+        
+         <beans:bean id="szpitalDAO" class="com.hospital.spring.dao.SzpitalKomOrgDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+        
+        
+        <beans:bean id="pracownikDAO" class="com.hospital.spring.dao.PracownikDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="pracownikService" class="com.hospital.spring.service.PracownikServiceImpl">
+		<beans:property name="pracownikDAO" ref="pracownikDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="historiaChorobyDAO" class="com.hospital.spring.dao.HistoriaChorobyDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="historiaChorobyService" class="com.hospital.spring.service.HistoriaChorobyServiceImpl">
+		<beans:property name="historiaChorobyDAO" ref="historiaChorobyDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="wpisDoSzpitalaDAO" class="com.hospital.spring.dao.WpisDoSzpitalaDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="wpisDoSzpitalaService" class="com.hospital.spring.service.WpisDoSzpitalaServiceImpl">
+		<beans:property name="wpisDoSzpitalaDAO" ref="wpisDoSzpitalaDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="wypisZeSzpitalaDAO" class="com.hospital.spring.dao.WypisZeSzpitalaDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="wypisZeSzpitalaService" class="com.hospital.spring.service.WypisZeSzpitalaServiceImpl">
+		<beans:property name="wypisZeSzpitalaDAO" ref="wypisZeSzpitalaDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="ksiegaPrzyjecWypisowDAO" class="com.hospital.spring.dao.KsiegaPrzyjecWypisowDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="ksiegaPrzyjecWypisowService" class="com.hospital.spring.service.KsiegaPrzyjecWypisowServiceImpl">
+		<beans:property name="ksiegaPrzyjecWypisowDAO" ref="ksiegaPrzyjecWypisowDAO"></beans:property>
+	</beans:bean>
+        
+        <beans:bean id="ksiegaChorychOddzialuDAO" class="com.hospital.spring.dao.KsiegaChorychOddzialuDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="ksiegaChorychOddzialuService" class="com.hospital.spring.service.KsiegaChorychOddzialuServiceImpl">
+		<beans:property name="ksiegaChorychOddzialuDAO" ref="ksiegaChorychOddzialuDAO"></beans:property>
+	</beans:bean>
+        
+        <beans:bean id="przebiegHospitalizacjiDAO" class="com.hospital.spring.dao.PrzebiegHospitalizacjiDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="przebiegHospitalizacjiService" class="com.hospital.spring.service.PrzebiegHospitalizacjiServiceImpl">
+		<beans:property name="przebiegHospitalizacjiDAO" ref="przebiegHospitalizacjiDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="ksiegaRaportowPielegniarskichDAO" class="com.hospital.spring.dao.KsiegaRaportowPielegniarskichDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="ksiegaRaportowPielegniarskichService" class="com.hospital.spring.service.KsiegaRaportowPielegniarskichServiceImpl">
+		<beans:property name="ksiegaRaportowPielegniarskichDAO" ref="ksiegaRaportowPielegniarskichDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="raportPielegniarskiDAO" class="com.hospital.spring.dao.RaportPielegniarskiDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="raportPielegniarskiService" class="com.hospital.spring.service.RaportPielegniarskiServiceImpl">
+		<beans:property name="raportPielegniarskiDAO" ref="raportPielegniarskiDAO"></beans:property>
+	</beans:bean>
+       
+       
+       <beans:bean id="kartaInformacyjnaDAO" class="com.hospital.spring.dao.KartaInformacyjnaDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="kartaInformacyjnaService" class="com.hospital.spring.service.KartaInformacyjnaServiceImpl">
+		<beans:property name="kartaInformacyjnaDAO" ref="kartaInformacyjnaDAO"></beans:property>
+	</beans:bean>
+        
+        
+        <beans:bean id="ksiegaRaportowLekarskichDAO" class="com.hospital.spring.dao.KsiegaRaportowLekarskichDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="ksiegaRaportowLekarskichService" class="com.hospital.spring.service.KsiegaRaportowLekarskichServiceImpl">
+		<beans:property name="ksiegaRaportowLekarskichDAO" ref="ksiegaRaportowLekarskichDAO"></beans:property>
+	</beans:bean>
+        
+       
+        
+        
+        <beans:bean id="ksiegaZabiegowDAO" class="com.hospital.spring.dao.KsiegaZabiegowDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="ksiegaZabiegowService" class="com.hospital.spring.service.KsiegaZabiegowServiceImpl">
+		<beans:property name="ksiegaZabiegowDAO" ref="ksiegaZabiegowDAO"></beans:property>
+	</beans:bean>
+        
+        
+        
+        <beans:bean id="wywiadPielegniarskiDAO" class="com.hospital.spring.dao.WywiadPielegniarskiDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="wywiadPielegniarskiService" class="com.hospital.spring.service.WywiadPielegniarskiServiceImpl">
+		<beans:property name="wywiadPielegniarskiDAO" ref="wywiadPielegniarskiDAO"></beans:property>
+	</beans:bean>
+        
+         <beans:bean id="dzialanieDAO" class="com.hospital.spring.dao.DzialanieDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="dzialanieService" class="com.hospital.spring.service.DzialanieServiceImpl">
+		<beans:property name="dzialanieDAO" ref="dzialanieDAO"></beans:property>
+	</beans:bean>
+	<context:component-scan base-package="com.hospital.spring" />
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+<mvc:annotation-driven conversion-service="conversionService"/>
+        <beans:bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+     <beans:property name="converters">
+         <beans:list>
+             <!-- converters is a set of both converters and converterfactories -->
+             <beans:bean class="com.hospital.spring.converter.DateConverter" />
+         </beans:list>
+     </beans:property>
+ </beans:bean>
+
+</beans:beans>

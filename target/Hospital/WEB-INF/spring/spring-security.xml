@@ -1,0 +1,46 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+ 
+    
+    <http auto-config="true">
+        <intercept-url pattern="/stronaGlowna**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/ksiegaChorychOddzialu**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/ksiegaPrzyjecWypisow**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/ksiegaRaportowLekarskich**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/ksiegaRaportowPielegniarskich**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/ksiegaZabiegow**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/pacjenci**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/pacjentDodaj**" access="hasRole('ROLE_LEKARZ')" />
+        <intercept-url pattern="/dokumentyPacjenta**" access="hasRole('ROLE_LEKARZ')" />
+        <form-login login-page='/login' default-target-url="/stronaGlowna"
+                    authentication-failure-url="/login?error" />
+        <logout logout-success-url="/login?logout" />
+        <csrf disabled="true" />
+    </http>
+    
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                
+                               authorities-by-username-query="select pracownik.login, roles.name from pracownik join users_roles on pracownik.nr_PWZ = users_roles.user_id join roles on users_roles.role_id = roles.id where pracownik.login = ?"
+                               users-by-username-query="select pracownik.login, pracownik.haslo , pracownik.enabled from pracownik where pracownik.login = ?"
+            />
+        </authentication-provider>
+    </authentication-manager>
+ 
+    <beans:bean id="dataSource"
+                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <beans:property name="url"
+                        value="jdbc:mysql://localhost:3306/hospital?zeroDateTimeBehavior=convertToNull" />
+        <beans:property name="username" value="adminHospital" />
+        <beans:property name="password" value="hospitaladmin" />
+    </beans:bean>
+    
+ 
+</beans:beans>

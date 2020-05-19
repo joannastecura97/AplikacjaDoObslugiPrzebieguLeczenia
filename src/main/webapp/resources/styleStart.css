@@ -1,0 +1,87 @@
+body {
+    background: url(https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80) no-repeat center center fixed;
+
+  background-size: cover;
+  font-family: Verdana;
+    color: white;
+}
+
+table { 
+    margin-top: 0;
+    margin-left: auto; 
+      margin-right: auto;
+      text-align: center;
+      table-layout: fixed;
+      padding: 25px 25px 25px 25px;
+      font-size:25px;
+      
+}
+
+
+.center {
+    background-color: #222222;
+    
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  vertical-align: middle;
+  width: 35%;
+  border-radius: 50px;
+  border-width: 20px;
+  border: solid;
+  border-color: #616161;
+padding-bottom: 40px;
+padding-top: 35px;
+      
+}
+
+
+input {
+    font-size: 25px;
+     font-family: Verdana;
+     border-radius: 10px;
+     text-align: center;
+}
+h3{
+    font-size:30px; 
+    text-align: center;
+}
+
+.submit {
+    height: 40px;
+    width: 80%;
+}
+header {
+    opacity: 0.7;
+    background-color: black;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+
+.holder {
+    text-align: center;
+}
+
+
+h1{
+    font-size: 35px;
+    text-align: left;
+    margin-left: 40px;
+    
+}
+
+.message {
+    
+    color: #33CC00;
+    text-align: center;
+    font-weight: 600;
+}
+
+.errormessage {
+    color: #CC0000;
+    text-align: center;
+    font-weight: 600;
+}

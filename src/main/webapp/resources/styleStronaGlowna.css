@@ -1,0 +1,239 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    background: url(https://images.unsplash.com/photo-1519972345803-7b5e39723995?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80) no-repeat center center fixed;
+    font-family: Verdana;
+    min-height: 100%;
+}
+.navigation {
+     background-color: #333;
+     opacity: 0.9;
+  overflow: hidden;
+  margin-top: 25px;
+   color: white;
+
+}
+
+
+
+.navigation a {
+      float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+header {
+    
+    background-color: black;
+    opacity:0.9;
+    width: 100%;
+    padding:5px;
+    
+    position: fixed;
+    text-align: center;
+    left:0;
+    
+  
+}
+h1{
+    font-size: 16px;
+    text-align: right;
+    margin-right: 40px;
+     color: white;
+    
+}
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+.dateHolder {
+   
+    color: black;
+    
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+
+
+.navigation a.active{
+    background-color: #ddd;
+  color: black;
+}
+.navigation a:hover{
+ background-color: #785D52;
+  color: white;
+}
+
+.formula {
+    padding-bottom: 100%; margin-bottom: -100%;
+    font-size: 15px;
+    margin-left: auto; 
+    margin-right: auto;
+    vertical-align: top;
+    text-align: right;
+    width: 50%;
+
+}
+.formula td {
+    vertical-align: top;
+    text-align: right;
+}
+.formula td:nth-child(2){
+    text-align: left;
+}
+
+.tg  {border-collapse:collapse;
+      border-spacing:0;
+      border-color: black;
+      margin-left: auto; 
+      margin-right: auto;
+      text-align: center;
+      table-layout: fixed;
+      width: 60%;
+      font-size: 15px;
+      color:white;
+      border-color:black;
+border-style:solid;
+border-width:1px;
+}
+
+
+
+.tg td{padding:10px 5px;
+      background-color:#333;
+      opacity: 0.9;
+          color: white;
+     border-color:black;
+border-style:solid;
+border-width:1px;
+}
+
+.tg th{
+    font-weight:normal;
+    padding:10px 5px;
+    background-color:black;
+    opacity: 0.8
+}
+
+.tg .tg-4eph{
+    background-color:#f9f9f9
+}
+
+
+
+
+input {
+    font-size: 15px;
+     font-family: Verdana;
+     border-radius: 10px;
+     text-align: center;
+}
+
+textarea {
+    font-size: 15px;
+     font-family: Verdana;
+     border-radius: 10px;
+     height: 60px;
+     width: 80%
+     
+}
+
+.datepicker {
+    display: none;
+}
+
+.ui-datepicker {
+    width: 300px;
+    height: 300px;
+    margin: 5px auto 0;
+   
+    /*-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);*/
+}
+
+    .ui-datepicker table {
+        width: 100%;
+         background-color: #333;
+     opacity: 0.9;
+    }
+
+.ui-datepicker-header {
+    background-color: #785D52;;
+    color: white;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #111;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+    font-size: 15px;
+}
+
+.ui-datepicker-prev {
+    float: left;
+    cursor: pointer;
+    background-position: center -30px;
+}
+
+.ui-datepicker-next {
+    float: right;
+    cursor: pointer;
+    background-position: center 0px;
+}
+
+
+.ui-datepicker th {
+    background-color:#808080;
+    text-transform: uppercase;
+    font-size: 8px;
+    color: white;
+}
+
+.ui-datepicker tbody td {
+    padding: 0;
+}
+
+
+
+
+.ui-datepicker td span, .ui-datepicker td a {
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #ffffff;
+}
+
+.ui-datepicker-calendar .ui-state-default {
+      color:#ffffff;
+      height:20px;
+      width:40px;
+
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+    background: #785D52;
+}
+
+.ui-datepicker-calendar .ui-state-active {
+    background: #785D52;
+}
+
+.ui-datepicker-unselectable .ui-state-default {
+    background: #D6E4BE;
+}
+
+.errormessage {
+    color: #990033;
+    text-align: center;
+}
